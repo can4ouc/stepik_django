@@ -1,2 +1,2 @@
-# stepik_django
+#  web
 for lessons
