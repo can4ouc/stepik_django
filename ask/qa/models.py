@@ -3,9 +3,16 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+class QuestionManager(models.Manager):
+    def new(self):
+        return self.order_by('-added_at')
+
+    def popular(self):
+        return self.order_by('-rating')
 
 
-class Question(models):
+class Question(models.Model):
+    objects = QuestionManager()
     title = models.CharField(max_length=255, null=False)
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
@@ -13,12 +20,12 @@ class Question(models):
     author = models.ForeignKey(
         User,
         related_name='question_author',
-        on_delete=models.SET_NULL,
+        on_delete=models.DO_NOTHING,
     )
     likes = models.ManyToManyField(User, related_name='question_like_user')
 
 
-class Answer(models):
+class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(
@@ -29,13 +36,7 @@ class Answer(models):
     author = models.ForeignKey(
         User,
         related_name='answer_author',
-        on_delete=models.SET_NULL,
+        on_delete=models.DO_NOTHING,
     )
 
 
-class QuestionManager(models.Manager):
-    def new(self):
-        return self.order_by('-added_at')
-
-    def popular(self):
-        return self.order_by('-rating')
