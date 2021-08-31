@@ -9,10 +9,9 @@ class Question(models.Model):
     rating = models.IntegerField(default=0)
     author = models.ForeignKey(
         User,
-        related_name='question_author',
         on_delete=models.DO_NOTHING,
     )
-    likes = models.ManyToManyField(User, related_name='question_like_user')
+    likes = models.ManyToManyField(User)
 
 
     class Meta:
@@ -30,12 +29,10 @@ class Answer(models.Model):
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(
         Question,
-        related_name='question_answer',
         on_delete=models.CASCADE,
     )
     author = models.ForeignKey(
         User,
-        related_name='answer_author',
         on_delete=models.DO_NOTHING,
     )
 
