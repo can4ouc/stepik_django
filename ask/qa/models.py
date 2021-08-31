@@ -23,7 +23,7 @@ class Question(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('question', kwargs={'pk': self.pk})
+        return "/question/{}/".format(self.id)
 
 
 class Answer(models.Model):
