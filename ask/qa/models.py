@@ -11,8 +11,9 @@ class Question(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
+        related_name="question_author",
     )
-    likes = models.ManyToManyField(User)
+    likes = models.ManyToManyField(User, related_name="question_like")
 
 
     class Meta:
