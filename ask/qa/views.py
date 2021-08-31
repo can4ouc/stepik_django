@@ -10,7 +10,7 @@ from .models import Question
 
 def question(request, num, ):
     try:
-        q = Question.objects.get(id=num)
+        q = Question.objects.get(pk=num)
     except Question.DoesNotExist:
         raise Http404
 
@@ -24,7 +24,7 @@ def index(request):
         page = 1
     except TypeError:
         page = 1
-    questions = Question.objects.all().order_by('-id')
+    questions = Question.objects.all().order_by('-pk')
     paginator = Paginator(questions, 10)
     page = paginator.page(page)
 
