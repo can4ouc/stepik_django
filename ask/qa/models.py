@@ -25,6 +25,16 @@ class Question(models.Model):
     likes = models.ManyToManyField(User, related_name='question_like_user')
 
 
+    class Meta:
+        ordering = ('-added_at',)
+
+    def __str__(self):
+        return self.title
+
+    def get_url(self):
+        return "/question/{}/".format(self.id)
+
+
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
@@ -39,4 +49,7 @@ class Answer(models.Model):
         on_delete=models.DO_NOTHING,
     )
 
+
+    class Meta:
+        ordering = ('added_at',)
 
