@@ -19,7 +19,7 @@ def question(request, num, ):
         if form.is_valid():
             form._user = request.user
             _ = form.save()
-            url = q.get_url()
+            url = q.get_absolute_url()
             return HttpResponseRedirect(url)
     else:
         form = AnswerForm(initial={'question': q.id})
