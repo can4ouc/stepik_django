@@ -11,6 +11,7 @@ class Question(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
+        null=True,
         related_name="question_author",
     )
     likes = models.ManyToManyField(User, related_name="question_like")
@@ -31,10 +32,12 @@ class Answer(models.Model):
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(
         Question,
+        null=True,
         on_delete=models.CASCADE,
     )
     author = models.ForeignKey(
         User,
+        null=True,
         on_delete=models.DO_NOTHING,
     )
 
